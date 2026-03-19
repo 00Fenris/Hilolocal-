@@ -1,13 +1,17 @@
 :root {
-    --primary: #4A5D4E; /* Sage Green */
+    --primary: #4A5D4E;
+    --primary-light: #768E7C;
     --primary-dark: #3a4b3d;
-    --accent: #B87352; /* Terracotta */
+    --accent: #B87352;
+    --background: #FDFBF8;
     --bg-light: #FDFBF8;
     --bg-white: #FFFFFF;
     --bg-dark: #1E2521;
     --text: #2D2D2D;
     --text-light: #666666;
     --white: #FFFFFF;
+    --success: #2E7D32;
+    --border: #E0E0E0;
     --shadow: 0 10px 30px rgba(0,0,0,0.05);
     --radius: 20px;
     --radius-lg: 40px;
@@ -173,7 +177,7 @@ h1 {
 
 /* Sections */
 .section {
-    padding: 120px 0;
+    padding: 80px 0;
 }
 
 .bg-light { background-color: #F7F3EE; }
@@ -303,3 +307,52 @@ h2 {
 }
 
 .animate-in { animation: fadeInUp 1s ease forwards; }
+.animate-fade-in { animation: fadeInUp 0.8s ease forwards; }
+
+/* Product interaction */
+.tag {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.btn-trace {
+    background: none;
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.btn-trace:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn-buy {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: background 0.3s;
+    white-space: nowrap;
+}
+
+.btn-buy:hover {
+    background: var(--primary-light);
+}

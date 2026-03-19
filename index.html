@@ -3,192 +3,965 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HiloLocal - Innovación en Moda Sostenible</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>HiloLocal — Moda con Propósito</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4A5D4E;
+            --primary-light: #768E7C;
+            --primary-dark: #2c3d2f;
+            --accent: #B87352;
+            --accent-light: #d4946e;
+            --bg: #FDFBF8;
+            --text: #1A1A1A;
+            --text-light: #666;
+            --border: #E8E0D8;
+            --success: #2d7a30;
+            --shadow: 0 20px 60px rgba(0,0,0,0.08);
+            --shadow-hover: 0 30px 80px rgba(0,0,0,0.14);
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+
+        /* ─── NAVBAR ─── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 999;
+            padding: 20px 0;
+            transition: all 0.4s ease;
+        }
+        nav.scrolled {
+            background: rgba(253,251,248,0.92);
+            backdrop-filter: blur(20px);
+            padding: 12px 0;
+            box-shadow: 0 2px 40px rgba(0,0,0,0.06);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto;
+            padding: 0 32px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-logo img { height: 38px; }
+        .nav-links { display: flex; gap: 36px; list-style: none; }
+        .nav-links a {
+            font-size: 0.92rem; font-weight: 500;
+            color: var(--text); text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute;
+            bottom: -3px; left: 0; width: 0; height: 2px;
+            background: var(--accent); transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: var(--primary); }
+        .btn-nav {
+            background: var(--primary); color: white !important;
+            padding: 11px 26px; border-radius: 50px;
+            font-weight: 700; font-size: 0.9rem;
+            text-decoration: none; transition: all 0.3s;
+            border: none; cursor: pointer;
+        }
+        .btn-nav:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(74,93,78,0.3);
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            min-height: 100vh;
+            display: flex; align-items: center;
+            padding: 160px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(184,115,82,0.08) 0%, transparent 60%),
+                        radial-gradient(ellipse at 20% 80%, rgba(74,93,78,0.06) 0%, transparent 50%);
+        }
+        .hero-inner {
+            max-width: 1200px; margin: 0 auto; padding: 0 32px;
+            display: grid; grid-template-columns: 1.15fr 1fr;
+            gap: 80px; align-items: center;
+        }
+        .hero-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #EEF2EE; color: var(--primary);
+            padding: 8px 18px; border-radius: 50px;
+            font-size: 0.82rem; font-weight: 700;
+            margin-bottom: 28px;
+            border: 1px solid rgba(74,93,78,0.15);
+        }
+        .hero-tag span { font-size: 1rem; }
+        h1 {
+            font-size: 4.4rem; line-height: 1.06;
+            margin-bottom: 28px; font-weight: 900;
+            letter-spacing: -0.03em;
+        }
+        h1 em {
+            font-style: normal; color: var(--accent);
+            position: relative;
+        }
+        h1 em::after {
+            content: '';
+            position: absolute; bottom: 2px; left: 0; right: 0;
+            height: 4px; background: var(--accent);
+            opacity: 0.25; border-radius: 2px;
+        }
+        .hero-sub {
+            font-size: 1.2rem; color: var(--text-light);
+            line-height: 1.7; margin-bottom: 44px;
+            max-width: 520px;
+        }
+        .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+        .btn-primary {
+            background: var(--primary); color: white;
+            padding: 16px 34px; border-radius: 50px;
+            font-weight: 700; font-size: 0.98rem;
+            text-decoration: none; transition: all 0.3s;
+            border: none; cursor: pointer; display: inline-block;
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(74,93,78,0.35);
+        }
+        .btn-outline {
+            border: 2px solid var(--primary); color: var(--primary);
+            padding: 14px 32px; border-radius: 50px;
+            font-weight: 700; font-size: 0.98rem;
+            text-decoration: none; transition: all 0.3s; display: inline-block;
+        }
+        .btn-outline:hover {
+            background: var(--primary); color: white;
+            transform: translateY(-3px);
+        }
+        .hero-img {
+            position: relative;
+        }
+        .hero-img img {
+            width: 100%; border-radius: 32px;
+            box-shadow: var(--shadow-hover);
+            display: block;
+        }
+        .hero-badge {
+            position: absolute; bottom: 28px; left: -24px;
+            background: white; border-radius: 20px;
+            padding: 16px 22px; box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            display: flex; align-items: center; gap: 12px;
+            font-weight: 700; font-size: 0.9rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        .hero-badge-dot {
+            width: 12px; height: 12px; border-radius: 50%;
+            background: #4CAF50; box-shadow: 0 0 0 4px rgba(76,175,80,0.2);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ─── STATS BAR ─── */
+        .stats-bar {
+            background: var(--primary);
+            padding: 48px 0;
+        }
+        .stats-inner {
+            max-width: 1200px; margin: 0 auto; padding: 0 32px;
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 24px; text-align: center; color: white;
+        }
+        .stat-num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.8rem; font-weight: 900;
+            line-height: 1; margin-bottom: 8px;
+        }
+        .stat-label { font-size: 0.9rem; opacity: 0.75; font-weight: 500; }
+        .stat-divider { width: 1px; background: rgba(255,255,255,0.15); height: 60px; margin: auto; }
+
+        /* ─── SECTION BASE ─── */
+        section { padding: 100px 0; }
+        .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+        .section-label {
+            display: block;
+            color: var(--accent); font-weight: 700; font-size: 0.8rem;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        h2 {
+            font-size: 2.8rem; font-weight: 900;
+            letter-spacing: -0.025em; line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .sub { color: var(--text-light); font-size: 1.1rem; line-height: 1.65; }
+
+        /* ─── ARTISANS ─── */
+        .artisan-scroll {
+            display: flex; gap: 16px; overflow-x: auto;
+            padding: 4px 32px 16px;
+            margin: 0; scrollbar-width: none;
+        }
+        .artisan-scroll::-webkit-scrollbar { display: none; }
+        .artisan-chip {
+            flex-shrink: 0;
+            background: white; border: 1.5px solid var(--border);
+            border-radius: 50px; padding: 10px 20px 10px 12px;
+            display: flex; align-items: center; gap: 10px;
+            cursor: pointer; transition: all 0.3s;
+            font-size: 0.88rem; font-weight: 600;
+        }
+        .artisan-chip:hover {
+            border-color: var(--primary);
+            background: #f0f5f1;
+            transform: translateY(-2px);
+        }
+        .artisan-avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 0.85rem; color: white;
+        }
+
+        /* ─── PRODUCTS ─── */
+        .bg-cream { background: #F7F3EE; }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .product-card {
+            background: white; border-radius: 24px;
+            overflow: hidden; box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-hover);
+        }
+        .product-img {
+            position: relative; overflow: hidden;
+            height: 300px;
+        }
+        .product-img img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .product-card:hover .product-img img { transform: scale(1.05); }
+        .product-tag {
+            position: absolute; top: 16px; left: 16px;
+            color: white; padding: 5px 14px;
+            border-radius: 50px; font-size: 0.78rem; font-weight: 700;
+        }
+        .product-body { padding: 24px; }
+        .product-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem; font-weight: 700; margin-bottom: 6px;
+        }
+        .product-artisan {
+            font-size: 0.85rem; color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        .product-footer {
+            display: flex; align-items: center;
+            justify-content: space-between; gap: 10px;
+        }
+        .product-price {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem; font-weight: 900; color: var(--primary);
+        }
+        .btn-trace {
+            background: none; border: 1.5px solid var(--border);
+            padding: 9px 16px; border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600; font-size: 0.82rem;
+            cursor: pointer; transition: all 0.3s; color: var(--text);
+            white-space: nowrap;
+        }
+        .btn-trace:hover { border-color: var(--primary); color: var(--primary); }
+        .btn-buy {
+            background: var(--primary); color: white;
+            border: none; padding: 9px 20px; border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700; font-size: 0.82rem;
+            cursor: pointer; transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .btn-buy:hover { background: var(--primary-dark); }
+
+        /* ─── HOW IT WORKS ─── */
+        .steps-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 32px; margin-top: 64px;
+        }
+        .step { text-align: center; }
+        .step-num {
+            width: 64px; height: 64px; border-radius: 20px;
+            background: var(--primary); color: white;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem; font-weight: 900;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+        }
+        .step h3 { font-size: 1rem; margin-bottom: 8px; }
+        .step p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; }
+
+        /* ─── BLOCKCHAIN ─── */
+        .blockchain-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 80px; align-items: center;
+        }
+        .blockchain-img img {
+            width: 100%; border-radius: 24px;
+            box-shadow: var(--shadow-hover);
+        }
+        .feature-list { margin-top: 36px; display: flex; flex-direction: column; gap: 20px; }
+        .feature-item {
+            display: flex; gap: 16px; align-items: flex-start;
+        }
+        .feature-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: #EEF2EE; display: flex;
+            align-items: center; justify-content: center;
+            font-size: 1.2rem; flex-shrink: 0;
+        }
+        .feature-item h4 { font-size: 0.95rem; margin-bottom: 4px; }
+        .feature-item p { font-size: 0.88rem; color: var(--text-light); }
+
+        /* ─── IMPACT COUNTER ─── */
+        .impact-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 28px; margin-top: 64px;
+        }
+        .impact-card {
+            background: white; border-radius: 24px;
+            padding: 40px 32px; text-align: center;
+            box-shadow: var(--shadow);
+            border-bottom: 4px solid var(--primary);
+        }
+        .impact-num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem; font-weight: 900;
+            color: var(--primary); line-height: 1;
+            margin-bottom: 12px;
+        }
+        .impact-label { font-size: 0.95rem; color: var(--text-light); font-weight: 500; }
+
+        /* ─── CIRCULAR ─── */
+        .circular-box {
+            background: var(--primary); border-radius: 40px;
+            padding: 80px; color: white;
+            display: grid; grid-template-columns: 1.2fr 1fr;
+            gap: 60px; align-items: center;
+        }
+        .circular-box h2 { color: white; }
+        .circular-sub { opacity: 0.85; font-size: 1.1rem; line-height: 1.7; margin-bottom: 40px; }
+        .circular-checks { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
+        .circular-checks li {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 0.98rem; opacity: 0.9; list-style: none;
+        }
+        .check-circle {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; font-size: 0.8rem;
+        }
+        .circular-img img {
+            width: 100%; border-radius: 24px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.25);
+        }
+        .btn-white {
+            background: white; color: var(--primary) !important;
+            padding: 15px 32px; border-radius: 50px;
+            font-weight: 700; text-decoration: none;
+            transition: all 0.3s; display: inline-block;
+        }
+        .btn-white:hover {
+            background: #EEF2EE;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+
+        /* ─── TESTIMONIALS ─── */
+        .testimonials-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 24px; margin-top: 64px;
+        }
+        .testimonial-card {
+            background: white; border-radius: 24px;
+            padding: 32px; box-shadow: var(--shadow);
+        }
+        .stars { color: #F5A623; font-size: 1.1rem; margin-bottom: 16px; }
+        .testimonial-text {
+            font-size: 0.95rem; color: var(--text);
+            line-height: 1.7; margin-bottom: 24px;
+            font-style: italic;
+        }
+        .testimonial-author { display: flex; align-items: center; gap: 12px; }
+        .author-avatar {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: var(--primary); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 0.9rem;
+        }
+        .author-name { font-weight: 700; font-size: 0.9rem; }
+        .author-role { font-size: 0.8rem; color: var(--text-light); }
+
+        /* ─── NEWSLETTER ─── */
+        .newsletter {
+            background: #1A1A1A; padding: 100px 0; color: white; text-align: center;
+        }
+        .newsletter h2 { color: white; max-width: 640px; margin: 0 auto 20px; }
+        .newsletter p { color: #999; max-width: 500px; margin: 0 auto 40px; line-height: 1.7; }
+        .newsletter-form {
+            display: flex; gap: 12px; max-width: 480px; margin: 0 auto;
+        }
+        .newsletter-form input {
+            flex: 1; padding: 15px 22px;
+            border-radius: 50px; border: none;
+            background: rgba(255,255,255,0.08);
+            color: white; font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            outline: none; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .newsletter-form input::placeholder { color: #666; }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: #111; padding: 60px 0 40px;
+            color: #888; font-size: 0.88rem;
+        }
+        .footer-top {
+            max-width: 1200px; margin: 0 auto; padding: 0 32px 40px;
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px; border-bottom: 1px solid #222;
+        }
+        .footer-brand img { height: 36px; margin-bottom: 16px; filter: brightness(0) invert(1); }
+        .footer-brand p { color: #555; font-size: 0.88rem; line-height: 1.7; }
+        .footer-col h4 { color: white; font-weight: 700; margin-bottom: 20px; font-size: 0.9rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col ul a { color: #555; text-decoration: none; transition: color 0.3s; }
+        .footer-col ul a:hover { color: white; }
+        .footer-bottom {
+            max-width: 1200px; margin: 0 auto; padding: 20px 32px 0;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        /* ─── MODAL ─── */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.6); z-index: 99999;
+            align-items: center; justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        .modal-box {
+            background: white; border-radius: 28px;
+            padding: 44px; max-width: 500px; width: 90%;
+            position: relative; animation: modalIn 0.3s ease;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .modal-close {
+            position: absolute; top: 20px; right: 24px;
+            background: #f5f5f5; border: none; width: 36px; height: 36px;
+            border-radius: 50%; font-size: 1rem;
+            cursor: pointer; transition: background 0.2s;
+        }
+        .modal-close:hover { background: #eaeaea; }
+        .modal-name { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; }
+        .modal-artisan { color: var(--text-light); font-size: 0.9rem; margin-bottom: 28px; }
+        .trace-steps { display: flex; flex-direction: column; gap: 12px; }
+        .trace-step {
+            display: flex; align-items: center; gap: 16px;
+            background: #faf8f5; border-radius: 14px; padding: 16px;
+        }
+        .trace-step-icon { font-size: 1.4rem; }
+        .trace-step-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 2px; }
+        .trace-step-val { color: var(--text-light); font-size: 0.83rem; }
+        .verified-badge {
+            margin-top: 20px;
+            background: #E8F5E9; color: var(--success);
+            border-radius: 12px; padding: 14px 18px;
+            display: flex; align-items: center; gap: 10px;
+            font-weight: 700; font-size: 0.88rem;
+        }
+
+        /* ─── SCROLL REVEAL ─── */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="container nav-content">
-            <div class="logo">
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <div class="nav-logo">
                 <img src="assets/logo.png" alt="HiloLocal">
             </div>
-            <nav class="nav-links">
-                <a href="#proposito">Propósito</a>
-                <a href="#cocreacion">Cocreación</a>
-                <a href="#mvp">MVP</a>
-                <a href="#tecnologia">Tecnología</a>
-                <a href="#financiacion">Financiación</a>
-            </nav>
-            <a href="https://github.com" target="_blank" class="btn-primary">Ver en GitHub</a>
+            <ul class="nav-links">
+                <li><a href="#marketplace">Marketplace</a></li>
+                <li><a href="#how">Cómo funciona</a></li>
+                <li><a href="#blockchain">Trazabilidad</a></li>
+                <li><a href="#circular">Hilo Circular</a></li>
+            </ul>
+            <a href="#newsletter" class="btn-nav">Únete gratis</a>
         </div>
-    </header>
+    </nav>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero animate-in">
-            <div class="container hero-grid">
-                <div class="hero-text">
-                    <span class="badge">Innovación en Gestión de Proyectos</span>
-                    <h1>El hilo que nos une es de <span class="highlight">proximidad</span>.</h1>
-                    <p>Conectamos a la Generación Z con artesanos locales mediante tecnología Blockchain y Economía Circular. Una respuesta directa a los ODS 9 y 12.</p>
-                    <div class="hero-btns">
-                        <a href="#mvp" class="btn-primary">Explorar Prototipo</a>
-                        <a href="#proposito" class="btn-secondary">Nuestro Impacto</a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="assets/hero.png" alt="HiloLocal Hero">
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <div class="hero-tag"><span>🌱</span> Innovación Sostenible · ODS 9 & 12</div>
+                <h1>La <em>moda local</em> que transforma comunidades.</h1>
+                <p class="hero-sub">Conectamos a artesanos de proximidad con consumidores conscientes mediante tecnología blockchain, IA y economía circular. Porque la siguiente prenda que compres puede cambiar tu barrio.</p>
+                <div class="hero-btns">
+                    <a href="#marketplace" class="btn-primary">Explorar Colecciones →</a>
+                    <a href="#how" class="btn-outline">Cómo funciona</a>
                 </div>
             </div>
-        </section>
+            <div class="hero-img">
+                <img src="assets/hero.png" alt="Moda Sostenible HiloLocal">
+                <div class="hero-badge">
+                    <div class="hero-badge-dot"></div>
+                    <span>+200 artesanos activos</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- ODS alignment -->
-        <section id="proposito" class="section">
-            <div class="container text-center">
-                <h2>Alineación con los ODS</h2>
-                <div class="ods-grid">
-                    <div class="ods-card">
-                        <div class="ods-icon">9</div>
-                        <h3>Industria, Innovación e Infraestructura</h3>
-                        <p>Fomentamos la digitalización del sector artesanal tradicional mediante infraestructuras resilientes.</p>
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+        <div class="stats-inner">
+            <div>
+                <div class="stat-num" data-target="200">0</div>
+                <div class="stat-label">Artesanos Registrados</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div>
+                <div class="stat-num" data-target="98">0</div>
+                <div class="stat-label">% Prendas Certificadas</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div>
+                <div class="stat-num" data-target="12000">0</div>
+                <div class="stat-label">Litros de Agua Ahorrados</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div>
+                <div class="stat-num" data-target="0">0</div>
+                <div class="stat-label">% Fast Fashion</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MARKETPLACE -->
+    <section id="marketplace" class="bg-cream">
+        <div class="wrap">
+            <div style="text-align:center; margin-bottom:16px;">
+                <span class="section-label">Catálogo</span>
+                <h2>Artesanos Destacados</h2>
+                <p class="sub">Prendas con historia, cerca de ti.</p>
+            </div>
+
+            <!-- Artisan chips -->
+            <div class="artisan-scroll" style="margin: 40px -32px 48px;">
+                <div class="artisan-chip">
+                    <div class="artisan-avatar" style="background:#4A5D4E;">TL</div>
+                    Taller de Lucía
+                </div>
+                <div class="artisan-chip">
+                    <div class="artisan-avatar" style="background:#B87352;">CU</div>
+                    Cuero Urbano
+                </div>
+                <div class="artisan-chip">
+                    <div class="artisan-avatar" style="background:#1565C0;">HM</div>
+                    Hilos de Madrid
+                </div>
+                <div class="artisan-chip">
+                    <div class="artisan-avatar" style="background:#7B1FA2;">VX</div>
+                    Vintage X
+                </div>
+                <div class="artisan-chip">
+                    <div class="artisan-avatar" style="background:#2e7d32;">EC</div>
+                    Eco Crafts
+                </div>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card reveal" onclick="">
+                    <div class="product-img">
+                        <img src="assets/product1.png" alt="Jersey Algodón Orgánico">
+                        <div class="product-tag" style="background:var(--success);">🍃 98% Sostenible</div>
                     </div>
-                    <div class="ods-card">
-                        <div class="ods-icon">12</div>
-                        <h3>Producción y Consumo Responsables</h3>
-                        <p>Cierre del círculo textil mediante nuestro programa 'Hilo Circular' y trazabilidad radical.</p>
+                    <div class="product-body">
+                        <div class="product-name">Jersey Algodón Orgánico</div>
+                        <div class="product-artisan">📍 Taller de Lucía · Lavapiés, Madrid</div>
+                        <div class="product-footer">
+                            <span class="product-price">45€</span>
+                            <button class="btn-trace" onclick="openModal('Jersey Algodón Orgánico','Taller de Lucía','Algodón Orgánico · Andalucía','Lavapiés, Madrid')">👁 Trazabilidad</button>
+                            <button class="btn-buy">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card reveal" onclick="">
+                    <div class="product-img">
+                        <img src="assets/product2.png" alt="Bolso Artesanal Sira">
+                        <div class="product-tag" style="background:var(--accent);">♻️ Material Reciclado</div>
+                    </div>
+                    <div class="product-body">
+                        <div class="product-name">Bolso Artesanal "Sira"</div>
+                        <div class="product-artisan">📍 Cuero Urbano · Malasaña, Madrid</div>
+                        <div class="product-footer">
+                            <span class="product-price">62€</span>
+                            <button class="btn-trace" onclick="openModal('Bolso Artesanal Sira','Cuero Urbano','Cuero Reciclado Certificado · Portugal','Malasaña, Madrid')">👁 Trazabilidad</button>
+                            <button class="btn-buy">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card reveal" onclick="">
+                    <div class="product-img">
+                        <img src="assets/product3.png" alt="Camisa Lino Natural">
+                        <div class="product-tag" style="background:#1565C0;">⭐ Edición Limitada</div>
+                    </div>
+                    <div class="product-body">
+                        <div class="product-name">Camisa Lino Natural</div>
+                        <div class="product-artisan">📍 Hilos de Madrid · Chueca, Madrid</div>
+                        <div class="product-footer">
+                            <span class="product-price">39€</span>
+                            <button class="btn-trace" onclick="openModal('Camisa Lino Natural','Hilos de Madrid','Lino Europeo GOTS · Francia','Chueca, Madrid')">👁 Trazabilidad</button>
+                            <button class="btn-buy">Comprar</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Cocreación -->
-        <section id="cocreacion" class="section bg-light">
-            <div class="container grid-2-1">
+    <!-- HOW IT WORKS -->
+    <section id="how">
+        <div class="wrap">
+            <div style="text-align:center;">
+                <span class="section-label">Proceso</span>
+                <h2>Cómo funciona HiloLocal</h2>
+                <p class="sub">Cuatro pasos para un consumo consciente, transparente y local.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step reveal">
+                    <div class="step-num">1</div>
+                    <h3>Descubre</h3>
+                    <p>Explora el catálogo de artesanos cercanos a ti, filtrado por barrio, material y valores.</p>
+                </div>
+                <div class="step reveal">
+                    <div class="step-num">2</div>
+                    <h3>Verifica</h3>
+                    <p>Analiza la trazabilidad completa de cada prenda mediante su pasaporte digital en blockchain.</p>
+                </div>
+                <div class="step reveal">
+                    <div class="step-num">3</div>
+                    <h3>Compra</h3>
+                    <p>Adquiere de forma segura y sencilla, sabiendo exactamente adónde va tu dinero.</p>
+                </div>
+                <div class="step reveal">
+                    <div class="step-num">4</div>
+                    <h3>Recicla</h3>
+                    <p>Entrega tus prendas usadas y gana Puntos Hilo para seguir apoyando la economía local.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOCKCHAIN -->
+    <section id="blockchain" class="bg-cream">
+        <div class="wrap">
+            <div class="blockchain-grid">
                 <div>
-                    <h2>Metodología de Cocreación</h2>
-                    <p>No diseñamos para los usuarios, diseñamos <strong>con</strong> ellos. HiloLocal es el resultado de sesiones de co-diseño con el ecosistema:</p>
-                    <ul class="check-list">
-                        <li><strong>Feed de artesanos:</strong> Simplificado tras entrevistas con artesanos locales.</li>
-                        <li><strong>Hilo Circular:</strong> Validado con tests de guerrilla en campus universitarios.</li>
-                        <li><strong>Identidad:</strong> Co-creada para reflejar valores de transparencia y cercanía.</li>
-                    </ul>
-                </div>
-                <div class="stats-box">
-                    <div class="stat">
-                        <span>+15</span>
-                        <p>Entrevistas Realizadas</p>
+                    <span class="section-label">Tecnología</span>
+                    <h2>Transparencia Radical con Blockchain</h2>
+                    <p class="sub">Cada prenda lleva un pasaporte digital inmutable. Sabes exactamente quién la hizo, con qué materiales y desde dónde llegó a tus manos. Cero greenwashing.</p>
+                    <div class="feature-list">
+                        <div class="feature-item reveal">
+                            <div class="feature-icon">⛓️</div>
+                            <div>
+                                <h4>Registro Inmutable</h4>
+                                <p>Cada transacción de la cadena de suministro queda grabada de forma permanente e inalterable.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item reveal">
+                            <div class="feature-icon">🤖</div>
+                            <div>
+                                <h4>IA Fashion Curator</h4>
+                                <p>Algoritmo de recomendación personalizada que sugiere prendas sostenibles según tu estilo.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item reveal">
+                            <div class="feature-icon">📲</div>
+                            <div>
+                                <h4>Etiquetado NFC</h4>
+                                <p>Acerca el móvil y accede al storytelling del artesano: su historia, su taller, su mundo.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- MVP Catalog -->
-        <section id="mvp" class="section">
-            <div class="container text-center">
-                <h2>Catálogo MVP de Alta Fidelidad</h2>
-                <p>Una muestra de la experiencia de usuario diseñada para validar la tracción del mercado.</p>
-                <div class="product-grid">
-                    <div class="product-card">
-                        <img src="assets/product1.png" alt="Producto 1">
-                        <h3>Jersey Algodón Orgánico</h3>
-                        <p>Artesano: Taller de Lucía</p>
-                        <span class="price">45,00€</span>
-                    </div>
-                    <div class="product-card">
-                        <img src="assets/product2.png" alt="Producto 2">
-                        <h3>Bolso "Sira" Reciclado</h3>
-                        <p>Artesano: Cuero Urbano</p>
-                        <span class="price">62,00€</span>
-                    </div>
-                    <div class="product-card">
-                        <img src="assets/product3.png" alt="Producto 3">
-                        <h3>Camisa Lino Natural</h3>
-                        <p>Artesano: Hilos de Madrid</p>
-                        <span class="price">39,00€</span>
-                    </div>
+                <div class="blockchain-img reveal">
+                    <img src="assets/App_Trazabilidad_SinLogo.png" alt="Pantalla Trazabilidad">
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Tecnología -->
-        <section id="tecnologia" class="section bg-dark text-white">
-            <div class="container">
-                <div class="text-center mb-60">
-                    <h2>Tecnología como Motor de Innovación</h2>
+    <!-- IMPACT -->
+    <section>
+        <div class="wrap">
+            <div style="text-align:center;">
+                <span class="section-label">Impacto</span>
+                <h2>Nuestro Compromiso con los ODS</h2>
+                <p class="sub">Cada compra en HiloLocal genera un impacto medible y real alineado con los Objetivos de Desarrollo Sostenible.</p>
+            </div>
+            <div class="impact-grid">
+                <div class="impact-card reveal">
+                    <div class="impact-num">-70%</div>
+                    <div class="impact-label">Agua consumida vs fast fashion convencional (ODS 12)</div>
                 </div>
-                <div class="tech-grid">
-                    <div class="tech-card">
-                        <h3>Blockchain</h3>
-                        <p>Trazabilidad inmutable mediante pasaportes digitales para cada prenda.</p>
-                    </div>
-                    <div class="tech-card">
-                        <h3>IA Generativa</h3>
-                        <p>Curación de estilo personalizada para optimizar el consumo ético.</p>
-                    </div>
-                    <div class="tech-card">
-                        <h3>NFC / Smart Labels</h3>
-                        <p>Storytelling interactivo al acercar el smartphone a la prenda.</p>
-                    </div>
+                <div class="impact-card reveal">
+                    <div class="impact-num">100%</div>
+                    <div class="impact-label">Artesanos con contrato justo y trazabilidad verificada (ODS 9)</div>
                 </div>
-                <div class="tech-showcase">
-                    <img src="assets/App_Trazabilidad_SinLogo.png" alt="Demo Trazabilidad">
-                    <img src="assets/App_Panel_Impacto_SinLogo.png" alt="Demo Impacto">
+                <div class="impact-card reveal">
+                    <div class="impact-num">0 €</div>
+                    <div class="impact-label">A grandes corporaciones. Todo el dinero va a tu barrio.</div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Financiación -->
-        <section id="financiacion" class="section">
-            <div class="container grid-2">
+    <!-- CIRCULAR -->
+    <section id="circular">
+        <div class="wrap">
+            <div class="circular-box">
                 <div>
-                    <h2>Ruta de Financiación</h2>
-                    <p>HiloLocal es un proyecto de innovación escalable. Nuestra estrategia de búsqueda de capital incluye:</p>
-                    <ul class="steps">
-                        <li><span>1</span> <strong>ENISA:</strong> Línea para jóvenes emprendedores tecnológicos.</li>
-                        <li><span>2</span> <strong>NEOTEC:</strong> Subvención para el desarrollo del núcleo de IA.</li>
-                        <li><span>3</span> <strong>ESG Investors:</strong> Rondas con inversores de impacto social.</li>
+                    <span class="section-label" style="color:#A3B18A;">Economía Circular</span>
+                    <h2>Cierra el círculo con <span style="color:#A3B18A;">Hilo Circular</span></h2>
+                    <p class="circular-sub">No tires tu ropa, dale una segunda vida. Entrega tus prendas usadas en nuestros puntos de recogida y recibe créditos para tus próximas compras.</p>
+                    <ul class="circular-checks">
+                        <li><div class="check-circle">✓</div> Recuperamos y reutilizamos materiales textiles de alta calidad</li>
+                        <li><div class="check-circle">✓</div> Residuo cero: el 100% se reutiliza o recicla</li>
+                        <li><div class="check-circle">✓</div> Ganas Puntos Hilo canjeables en toda la plataforma</li>
                     </ul>
+                    <a href="#newsletter" class="btn-white">Empezar a reciclar →</a>
                 </div>
-                <div class="cta-box">
-                    <h3>¿Listo para revolucionar la moda local?</h3>
-                    <p>Este proyecto se encuentra en fase de Ideación y lanzamiento de MVP.</p>
-                    <a href="mailto:info@hilolocal.es" class="btn-primary">Contacto Grupo 6</a>
+                <div class="circular-img">
+                    <img src="assets/App_Panel_Impacto_SinLogo.png" alt="Panel de Impacto">
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer class="footer">
-        <div class="container footer-content">
-            <p>&copy; 2026 HiloLocal - Proyecto Innovación Grupo 6 (ADET).</p>
-            <div class="socials">
-                <span>Instagram</span>
-                <span>TikTok</span>
-                <span>LinkedIn</span>
+    <!-- TESTIMONIALS -->
+    <section class="bg-cream">
+        <div class="wrap">
+            <div style="text-align:center;">
+                <span class="section-label">Comunidad</span>
+                <h2>Lo que dicen nuestros usuarios</h2>
             </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Por fin una plataforma donde sé exactamente quién hizo mi ropa. El jersey que compré tiene hasta el nombre del artesano en la etiqueta NFC. Increíble."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">LC</div>
+                        <div>
+                            <div class="author-name">Lucía C.</div>
+                            <div class="author-role">Estudiante Universitaria, Madrid</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Desde que me uní a HiloLocal como artesano, mis ventas han crecido un 40%. La plataforma gestiona todo y yo solo me preocupo de hacer lo que amo."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">CM</div>
+                        <div>
+                            <div class="author-name">Carlos M.</div>
+                            <div class="author-role">Artesano Textil, Lavapiés</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"El programa Hilo Circular me convenció. Entregué 3 bolsas de ropa vieja y ahora tengo créditos para gastar. Y encima sé que no va a un vertedero."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div>
+                            <div class="author-name">Marta R.</div>
+                            <div class="author-role">Comerciante Local, Malasaña</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter" id="newsletter">
+        <div class="wrap">
+            <h2>¿Lista para vestir con valores?</h2>
+            <p>Únete a nuestra comunidad de consumidores conscientes y recibe acceso anticipado al catálogo de temporada, descuentos exclusivos y las historias de nuestros artesanos.</p>
+            <div class="newsletter-form">
+                <input type="email" placeholder="tuemail@ejemplo.com">
+                <button class="btn-nav" onclick="alert('¡Gracias! Pronto recibirás novedades de HiloLocal.')">Unirme →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="HiloLocal">
+                <p>Conectamos comunidades a través de la moda sostenible. Fabricando un futuro mejor, punto a punto.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Plataforma</h4>
+                <ul>
+                    <li><a href="#">Marketplace</a></li>
+                    <li><a href="#">Artesanos</a></li>
+                    <li><a href="#">Trazabilidad</a></li>
+                    <li><a href="#">Hilo Circular</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Empresa</h4>
+                <ul>
+                    <li><a href="#">Quiénes somos</a></li>
+                    <li><a href="#">ODS e Impacto</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Financiación</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="#">hola@hilolocal.es</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">TikTok</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 HiloLocal. Todos los derechos reservados.</span>
+            <span>Proyecto de Innovación — Grupo 6 (ADET)</span>
         </div>
     </footer>
 
+    <!-- MODAL TRAZABILIDAD -->
+    <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div class="modal-name" id="m-name">-</div>
+            <div class="modal-artisan" id="m-artisan">-</div>
+            <div class="trace-steps">
+                <div class="trace-step">
+                    <div class="trace-step-icon">🌱</div>
+                    <div>
+                        <div class="trace-step-title">Origen del Material</div>
+                        <div class="trace-step-val" id="m-material">-</div>
+                    </div>
+                </div>
+                <div class="trace-step">
+                    <div class="trace-step-icon">👐</div>
+                    <div>
+                        <div class="trace-step-title">Taller de Confección</div>
+                        <div class="trace-step-val" id="m-taller">-</div>
+                    </div>
+                </div>
+                <div class="trace-step">
+                    <div class="trace-step-icon">🚴</div>
+                    <div>
+                        <div class="trace-step-title">Entrega</div>
+                        <div class="trace-step-val">Mensajería de proximidad en bicicleta · Huella 0</div>
+                    </div>
+                </div>
+            </div>
+            <div class="verified-badge">✅ &nbsp;Verificado por Blockchain · GOTS Certificado · CO₂ Neutro</div>
+        </div>
+    </div>
+
     <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
         });
 
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+        }, { threshold: 0.12 });
+        reveals.forEach(el => observer.observe(el));
+
+        // Counter animation
+        function animateCounters() {
+            document.querySelectorAll('.stat-num[data-target]').forEach(el => {
+                const target = +el.dataset.target;
+                const duration = 1800;
+                const step = target / (duration / 16);
+                let current = 0;
+                const timer = setInterval(() => {
+                    current = Math.min(current + step, target);
+                    el.textContent = Math.floor(current).toLocaleString();
+                    if (current >= target) clearInterval(timer);
+                }, 16);
+            });
+        }
+        const statsBar = document.querySelector('.stats-bar');
+        const statsObserver = new IntersectionObserver(([e]) => {
+            if (e.isIntersecting) { animateCounters(); statsObserver.disconnect(); }
+        }, { threshold: 0.3 });
+        statsObserver.observe(statsBar);
+
+        // Modal
+        function openModal(name, artisan, material, taller) {
+            document.getElementById('m-name').textContent = name;
+            document.getElementById('m-artisan').textContent = 'Por: ' + artisan;
+            document.getElementById('m-material').textContent = material;
+            document.getElementById('m-taller').textContent = taller;
+            const modal = document.getElementById('modal');
+            modal.style.display = 'flex';
+        }
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            });
         });
     </script>
 </body>
