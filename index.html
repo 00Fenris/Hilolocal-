@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HiloLocal conecta a la Generación Z con artesanos locales mediante blockchain, IA y economía circular. Moda sostenible con trazabilidad radical.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧵</text></svg>">
     <title>HiloLocal — Moda con Propósito</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -155,7 +157,7 @@
         /* FOOTER */
         footer{background:#111;padding:60px 0 36px;color:#777;font-size:.86rem}
         .ft{max-width:1280px;margin:0 auto;padding:0 40px 40px;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;border-bottom:1px solid #222}
-        .fbrand img{height:44px;margin-bottom:16px;filter:brightness(0) invert(1);opacity:.85}
+        .fbrand img{height:80px;margin-bottom:16px;margin:-16px 0;opacity:.85}
         .fbrand p{color:#444;font-size:.86rem;line-height:1.7}
         .fcol h4{color:white;font-weight:700;margin-bottom:18px;font-size:.88rem}
         .fcol ul{display:flex;flex-direction:column;gap:9px}
@@ -228,6 +230,69 @@
         /* TOAST */
         .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);background:#1A1A1A;color:white;padding:14px 24px;border-radius:50px;font-size:.9rem;font-weight:600;z-index:9999;transition:transform .4s cubic-bezier(.25,.8,.25,1);pointer-events:none}
         .toast.show{transform:translateX(-50%) translateY(0)}
+
+        /* TEAM */
+        .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:60px}
+        .team-card{background:white;border-radius:24px;padding:32px;text-align:center;box-shadow:var(--sh);transition:transform .3s}
+        .team-card:hover{transform:translateY(-8px)}
+        .team-avatar{width:80px;height:80px;border-radius:50%;background:var(--p);color:white;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.4rem;margin:0 auto 16px}
+        .team-card h4{font-size:1rem;margin-bottom:4px}
+        .team-card p{font-size:.85rem;color:var(--tl)}
+
+        /* FAQ */
+        .faq-list{max-width:720px;margin:48px auto 0;display:flex;flex-direction:column;gap:12px}
+        .faq-item{background:white;border-radius:16px;box-shadow:var(--sh);overflow:hidden}
+        .faq-q{padding:20px 24px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:700;font-size:.95rem;transition:background .2s;gap:12px}
+        .faq-q:hover{background:#faf8f5}
+        .faq-arrow{transition:transform .3s;font-size:1.2rem;flex-shrink:0}
+        .faq-item.open .faq-arrow{transform:rotate(180deg)}
+        .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s;padding:0 24px;color:var(--tl);font-size:.92rem;line-height:1.7}
+        .faq-item.open .faq-a{max-height:300px;padding:0 24px 20px}
+
+        /* COOKIE */
+        .cookie-bar{position:fixed;bottom:0;left:0;width:100%;background:#1A1A1A;color:white;padding:18px 32px;z-index:990;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:.88rem;transform:translateY(100%);transition:transform .4s ease}
+        .cookie-bar.show{transform:translateY(0)}
+        .cookie-bar p{max-width:700px;opacity:.85;line-height:1.5}
+        .cookie-btns{display:flex;gap:10px;flex-shrink:0}
+        .cookie-accept{background:var(--p);color:white;border:none;padding:10px 22px;border-radius:50px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;font-size:.85rem}
+        .cookie-decline{background:none;color:#888;border:1px solid #333;padding:10px 22px;border-radius:50px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;font-size:.85rem}
+
+        /* BACK TO TOP */
+        .btt{position:fixed;bottom:28px;right:28px;width:48px;height:48px;border-radius:50%;background:var(--p);color:white;border:none;font-size:1.2rem;cursor:pointer;z-index:800;opacity:0;pointer-events:none;transition:all .3s;box-shadow:0 6px 20px rgba(74,93,78,.3)}
+        .btt.show{opacity:1;pointer-events:all}
+        .btt:hover{background:var(--pd);transform:translateY(-3px)}
+
+        /* RESPONSIVE */
+        @media(max-width:1024px){
+            .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+            h1{font-size:3rem}
+            .hero-sub{margin:0 auto 36px}
+            .hero-btns{justify-content:center}
+            .hero-badge{left:auto;right:20px}
+            .stats-inner{flex-wrap:wrap;gap:24px}
+            .sdiv{display:none}
+            .products-grid,.impact-grid,.t-grid,.team-grid{grid-template-columns:1fr 1fr}
+            .steps-grid{grid-template-columns:1fr 1fr}
+            .bc-grid,.circular-box{grid-template-columns:1fr;gap:40px}
+            .ft{grid-template-columns:1fr 1fr}
+        }
+        @media(max-width:640px){
+            .nav-links{display:none}
+            .nav-inner{padding:0 20px}
+            h1{font-size:2.2rem}
+            h2{font-size:1.8rem}
+            section{padding:60px 0}
+            .wrap{padding:0 20px}
+            .products-grid,.impact-grid,.t-grid,.steps-grid,.team-grid{grid-template-columns:1fr}
+            .circular-box{padding:40px;border-radius:24px}
+            .ft{grid-template-columns:1fr;gap:24px}
+            .fb{flex-direction:column;gap:8px;text-align:center}
+            .nl-form{flex-direction:column}
+            .hero-inner{padding:0 20px}
+            .stats-inner{padding:0 20px}
+            .cart-panel{width:100%}
+            .cookie-bar{flex-direction:column;gap:12px;text-align:center}
+        }
     </style>
 </head>
 <body>
@@ -442,6 +507,67 @@
     </div>
 </section>
 
+<!-- QUIÉNES SOMOS -->
+<section id="team">
+    <div class="wrap" style="text-align:center">
+        <span class="sec-label">Equipo</span>
+        <h2>Quiénes Somos</h2>
+        <p class="sub">El equipo que está detrás de HiloLocal. Cuatro perfiles complementarios con una visión compartida.</p>
+        <div class="team-grid">
+            <div class="team-card rev">
+                <div class="team-avatar">AD</div>
+                <h4>Alonso Díaz</h4>
+                <p>Estrategia de Negocio & Lean Startup</p>
+            </div>
+            <div class="team-card rev">
+                <div class="team-avatar" style="background:var(--a)">RC</div>
+                <h4>Rodrigo Carral</h4>
+                <p>Diseño de Producto & UX Research</p>
+            </div>
+            <div class="team-card rev">
+                <div class="team-avatar" style="background:#1565C0">IM</div>
+                <h4>Ignacio Molina</h4>
+                <p>Desarrollo Tecnológico & Data</p>
+            </div>
+            <div class="team-card rev">
+                <div class="team-avatar" style="background:#7B1FA2">LP</div>
+                <h4>Leslie Paulina Pol</h4>
+                <p>Marketing & Comunidad</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="bg-cream" id="faq">
+    <div class="wrap" style="text-align:center">
+        <span class="sec-label">Soporte</span>
+        <h2>Preguntas Frecuentes</h2>
+        <div class="faq-list">
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <div class="faq-q">¿HiloLocal tiene coste para los compradores? <span class="faq-arrow">▼</span></div>
+                <div class="faq-a">No, la plataforma es completamente gratuita para los compradores. Solo pagas el precio de la prenda que adquieres. Sin comisiones ni costes ocultos.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <div class="faq-q">¿Cómo verifico la trazabilidad de una prenda? <span class="faq-arrow">▼</span></div>
+                <div class="faq-a">Cada producto tiene un botón "Trazabilidad" que abre su pasaporte digital. Además, las prendas físicas llevan etiquetas NFC: acerca tu móvil y accedes a toda la información del artesano y los materiales.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <div class="faq-q">¿Cómo funciona el programa Hilo Circular? <span class="faq-arrow">▼</span></div>
+                <div class="faq-a">Entrega tus prendas usadas en nuestros puntos de recogida o solicita una recogida a domicilio. Evaluamos la calidad del textil y te asignamos Puntos Hilo que puedes canjear en tu próxima compra.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <div class="faq-q">¿Puedo unirme como artesano? <span class="faq-arrow">▼</span></div>
+                <div class="faq-a">Sí. Si eres artesano textil con producción local, puedes registrarte en nuestra plataforma. Verificamos tu taller, tus materiales y te damos acceso a todo el ecosistema de clientes.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <div class="faq-q">¿Qué tecnologías utiliza HiloLocal? <span class="faq-arrow">▼</span></div>
+                <div class="faq-a">Blockchain para trazabilidad inmutable, IA generativa para recomendación de estilo personalizado, y etiquetas NFC para storytelling interactivo. Todo orientado a garantizar transparencia total.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- NEWSLETTER -->
 <section class="newsletter" id="newsletter">
     <div class="wrap">
@@ -521,9 +647,24 @@
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
+<!-- COOKIE BANNER -->
+<div class="cookie-bar" id="cookieBar">
+    <p>🍪 Utilizamos cookies propias y de terceros para mejorar tu experiencia de navegación y analizar el tráfico. Al continuar, aceptas nuestra política de privacidad.</p>
+    <div class="cookie-btns">
+        <button class="cookie-accept" onclick="acceptCookies()">Aceptar cookies</button>
+        <button class="cookie-decline" onclick="declineCookies()">Solo esenciales</button>
+    </div>
+</div>
+
+<!-- BACK TO TOP -->
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Volver arriba">↑</button>
+
 <script>
     // NAV
-    window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>60));
+    window.addEventListener('scroll',()=>{
+        document.getElementById('navbar').classList.toggle('scrolled',scrollY>60);
+        document.getElementById('btt').classList.toggle('show',scrollY>600);
+    });
 
     // SMOOTH SCROLL
     document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}}));
@@ -562,6 +703,11 @@
 
     // TOAST
     function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800)}
+
+    // COOKIES
+    function acceptCookies(){document.getElementById('cookieBar').classList.remove('show');localStorage.setItem('hl_cookies','accepted')}
+    function declineCookies(){document.getElementById('cookieBar').classList.remove('show');localStorage.setItem('hl_cookies','essential')}
+    if(!localStorage.getItem('hl_cookies')){setTimeout(()=>document.getElementById('cookieBar').classList.add('show'),1500)}
 </script>
 </body>
 </html>
